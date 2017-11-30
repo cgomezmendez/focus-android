@@ -22,6 +22,7 @@ import org.junit.runner.RunWith;
 import org.mozilla.focus.R;
 import org.mozilla.focus.activity.MainActivity;
 import org.mozilla.focus.helpers.MainActivityFirstrunTestRule;
+import org.mozilla.focus.helpers.TestHelper;
 
 import java.util.Collections;
 
@@ -41,7 +42,6 @@ import static android.support.test.espresso.matcher.PreferenceMatchers.withTitle
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.isEnabled;
 import static android.support.test.espresso.matcher.ViewMatchers.withClassName;
-import static android.support.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.containsString;
@@ -164,6 +164,7 @@ public class SettingsScreenshots extends ScreenshotTest {
         onData(withKey(key))
                 .perform(click());
 
+        device.waitForIdle();
         final String addCustomURLAction = getString(R.string.preference_autocomplete_action_add);
         onView(withText(addCustomURLAction))
                 .check(matches(isDisplayed()));
@@ -184,6 +185,7 @@ public class SettingsScreenshots extends ScreenshotTest {
         onView(withId(R.id.save))
                 .perform(click());
         Screengrab.screenshot("Autocomplete_Add_Custom_URL_Saved_Popup");
+        device.waitForIdle();
         onView(withText(addCustomURLAction))
                 .check(matches(isDisplayed()));
 
@@ -200,6 +202,7 @@ public class SettingsScreenshots extends ScreenshotTest {
         /* Remove dialog */
         onView(withText(getString(R.string.preference_autocomplete_title_remove)))
                 .check(matches(isDisplayed()));
+        TestHelper.pressBackKey();  // remove keyboard
         Screengrab.screenshot("Autocomplete_Custom_URL_Remove_Dialog");
         Espresso.pressBack();
         onView(withText(addCustomURLAction))

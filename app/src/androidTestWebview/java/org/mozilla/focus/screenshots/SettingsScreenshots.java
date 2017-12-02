@@ -158,10 +158,7 @@ public class SettingsScreenshots extends ScreenshotTest {
         onView(withText(getString(R.string.preference_autocomplete_custom_summary)))
                 .perform(click());
         /* Add custom URL */
-        final String key = InstrumentationRegistry
-                .getTargetContext()
-                .getString(R.string.pref_key_screen_custom_domains);
-        onData(withKey(key))
+        onView(allOf(withText(getString(R.string.preference_autocomplete_subitem_customlist)),withParentIndex(0)))
                 .perform(click());
 
         device.waitForIdle();

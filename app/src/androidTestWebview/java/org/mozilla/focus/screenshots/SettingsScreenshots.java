@@ -21,9 +21,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mozilla.focus.R;
 import org.mozilla.focus.activity.MainActivity;
-import org.mozilla.focus.autocomplete.CustomAutocomplete;
 import org.mozilla.focus.helpers.MainActivityFirstrunTestRule;
-import org.mozilla.focus.helpers.TestHelper;
 
 import java.util.Collections;
 
@@ -87,6 +85,9 @@ public class SettingsScreenshots extends ScreenshotTest {
         /* Language List (First page only */
         onView(withText(R.string.preference_language))
                 .perform(click());
+
+        // Cancel button is not translated in some locales, and there are no R.id defined
+        // That can be checked in the language list dialog
         UiObject CancelBtn =  device.findObject(new UiSelector()
                 .resourceId("android:id/button2")
                 .enabled(true));
@@ -110,9 +111,9 @@ public class SettingsScreenshots extends ScreenshotTest {
 
         /* Remove Search Engine page */
         openActionBarOverflowOrOptionsMenu(InstrumentationRegistry.getContext());
+        device.waitForIdle();       // wait until dialog fully appears
         onView(withText(R.string.preference_search_remove))
                 .check(matches(isDisplayed()));
-        device.waitForIdle();
         Screengrab.screenshot("SearchEngine_Search_Engine_Menu");
         // Menu items don't have ids, so we have to match by text
         onView(withText(R.string.preference_search_remove))
@@ -162,7 +163,6 @@ public class SettingsScreenshots extends ScreenshotTest {
         onData(withKey(key))
                 .perform(click());
 
-        device.waitForIdle();
         final String addCustomURLAction = getString(R.string.preference_autocomplete_action_add);
         onView(withText(addCustomURLAction))
                 .check(matches(isDisplayed()));

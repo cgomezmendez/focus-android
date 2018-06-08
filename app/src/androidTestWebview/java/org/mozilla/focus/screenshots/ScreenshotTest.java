@@ -23,7 +23,7 @@ import tools.fastlane.screengrab.UiAutomatorScreenshotStrategy;
  * Base class for tests that take screenshots.
  */
 abstract class ScreenshotTest {
-    final long waitingTime = DateUtils.SECOND_IN_MILLIS * 30;
+    final long waitingTime = DateUtils.SECOND_IN_MILLIS * 10;
 
     private Context targetContext;
     private SessionLoadedIdlingResource loadingIdlingResource;

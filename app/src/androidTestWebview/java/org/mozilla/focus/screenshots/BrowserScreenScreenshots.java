@@ -155,12 +155,14 @@ public class BrowserScreenScreenshots extends ScreenshotTest {
 
     private void takeAddToHomeScreenScreenshot() throws UiObjectNotFoundException {
         TestHelper.menuButton.perform(click());
+        TestHelper.AddtoHSmenuItem.waitForExists(waitingTime);
         TestHelper.AddtoHSmenuItem.click();
 
         TestHelper.AddtoHSCancelBtn.waitForExists(waitingTime);
         Screengrab.screenshot("AddtoHSDialog");
 
-        TestHelper.AddtoHSCancelBtn.click();
+        device.pressBack();
+        device.pressBack();
         Assert.assertTrue(TestHelper.browserURLbar.waitForExists(waitingTime));
     }
 

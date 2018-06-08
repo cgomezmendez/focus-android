@@ -149,7 +149,9 @@ public final class TestHelper {
             .resourceId(getAppName() + ":id/add_to_homescreen")
             .enabled(true));
     public static UiObject AddtoHSCancelBtn = TestHelper.mDevice.findObject(new UiSelector()
-            .resourceId(getAppName() + ":id/addtohomescreen_dialog_cancel")
+           // .resourceId(getAppName() + ":id/addtohomescreen_dialog_cancel")
+            .className("android.widget.Button")
+            .instance(0)
             .enabled(true));
     public static UiObject AddtoHSOKBtn = TestHelper.mDevice.findObject(new UiSelector()
             .resourceId(getAppName() + ":id/addtohomescreen_dialog_add")
